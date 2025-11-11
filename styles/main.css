@@ -1,0 +1,536 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: #e0e6ed;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animation des particules en arrière-plan */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(100, 200, 255, 0.3);
+    border-radius: 50%;
+    animation: float 20s infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+h1 {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(100, 181, 246, 0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #8892b0;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.wishlist-card {
+    background: rgba(25, 35, 65, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(100, 181, 246, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+
+    /* Layout: image on top, content stretches, footer-area stuck to bottom */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 360px; /* donne de la place verticale pour mobile */
+}
+
+
+.wishlist-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(100, 181, 246, 0.4);
+    box-shadow: 0 20px 40px rgba(100, 181, 246, 0.2);
+}
+
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: rgba(10, 14, 39, 0.5);
+    flex: 0 0 auto; /* ne se redimensionne pas, reste en haut */
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.wishlist-card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 39, 0.8) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.wishlist-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-content {
+    padding: 1.5rem;
+    /* plus besoin de padding-bottom pour "faire de la place" */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 auto; /* prend l'espace restant pour pousser les liens en bas */
+}
+
+.card-title {
+    font-size: 1.4rem;
+    color: #e0e6ed;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #8892b0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.card-price {
+    font-size: 1.3rem;
+    color: #64b5f6;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    align-self: flex-end;
+    background: rgba(10,14,39,0.0);
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+}
+
+.card-links {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    position: relative;
+    margin-top: auto; /* pousse les liens vers le bas */
+    padding-top: 0.6rem;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+}
+
+/* ...existing code... */
+
+.wishlist-card {
+    background: rgba(25, 35, 65, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(100, 181, 246, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+
+    /* Layout: image on top, content stretches, footer-area stuck to bottom */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 360px; /* donne de la place verticale pour mobile */
+}
+
+/* ...existing code... */
+
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: rgba(10, 14, 39, 0.5);
+    flex: 0 0 auto; /* ne se redimensionne pas, reste en haut */
+}
+
+.card-content {
+    padding: 1.5rem;
+    /* plus besoin de padding-bottom pour "faire de la place" */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 auto; /* prend l'espace restant pour pousser les liens en bas */
+}
+
+/* place les liens à la fin du .card-content, en bas de la carte */
+.card-links {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    position: relative;
+    margin-top: auto; /* pousse les liens vers le bas */
+    padding-top: 0.6rem;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+}
+
+/* prix: par défaut à l'intérieur du flux, aligné à droite si possible */
+.card-price {
+    font-size: 1.3rem;
+    color: #64b5f6;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    align-self: flex-start;
+    background: rgba(10,14,39,0.0);
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+}
+
+/* mobile tweaks */
+@media (max-width: 480px) {
+    .wishlist-card {
+        min-height: 420px; /* plus d'espace vertical pour éviter chevauchement */
+    }
+
+    .card-image-container {
+        height: 200px;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .card-links {
+        flex-direction: column;
+        margin-top: 1rem;
+        gap: 0.6rem;
+        padding-bottom: 0.6rem;
+    }
+
+    .card-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card-price {
+        position: relative;
+        right: 0;
+        bottom: 0;
+        align-self: flex-end;
+        background: rgba(10,14,39,0.6);
+        padding: 0.35rem 0.7rem;
+        border-radius: 8px;
+        z-index: 3;
+        backdrop-filter: blur(6px);
+        font-size: 1.05rem;
+    }
+}
+
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(100, 181, 246, 0.1);
+    color: #64b5f6;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(100, 181, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.card-link:hover {
+    background: rgba(100, 181, 246, 0.2);
+    border-color: rgba(100, 181, 246, 0.4);
+    transform: translateX(5px);
+}
+
+.add-item-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(100, 181, 246, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.add-item-btn:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 15px 40px rgba(100, 181, 246, 0.6);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation échelonnée des cartes */
+.wishlist-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.wishlist-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.wishlist-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.wishlist-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.wishlist-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.wishlist-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+@media (max-width: 1200px) {
+    .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .wishlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .card-image-container {
+        height: 220px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .wishlist-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    body {
+        padding: 1rem;
+    }
+
+    .card-content {
+        padding: 1.2rem;
+    }
+
+    .add-item-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-description {
+        font-size: 0.9rem;
+    }
+
+    .card-price {
+        font-size: 1.1rem;
+    }
+
+    .card-links {
+        flex-direction: column;
+    }
+
+    .card-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .container {
+        margin: 10px auto;
+        padding: 0 10px;
+    }
+}
+
+footer {
+    background-color: #1e293b;
+    padding: 2rem 0;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-link{
+    color: white;
+    text-decoration: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.social-link {
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--primary-color);
+}
+
+.footer-text {
+    color: #94a3b8;
+}
